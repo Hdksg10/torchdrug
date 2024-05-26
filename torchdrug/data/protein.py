@@ -325,7 +325,7 @@ class Protein(Molecule):
         """
         if not os.path.exists(pdb_file):
             raise FileNotFoundError("No such file `%s`" % pdb_file)
-        mol = Chem.MolFromPDBFile(pdb_file)
+        mol = Chem.MolFromPDBFile(pdb_file, sanitize = False, proximityBonding = True)
         if mol is None:
             raise ValueError("RDKit cannot read PDB file `%s`" % pdb_file)
         return cls.from_molecule(mol, atom_feature, bond_feature, residue_feature, mol_feature, kekulize)
